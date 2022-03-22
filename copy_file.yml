@@ -1,0 +1,12 @@
+---
+
+- hosts: Servers
+  become: true
+  tasks:
+    - name: copy file
+      copy:
+        src: /home/mdemarchi/ansible_learn/install_apache.yml
+        dest: /home/mdemarchi
+        owner: mdemarchi
+        group: mdemarchi
+        mode: 755

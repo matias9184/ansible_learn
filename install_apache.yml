@@ -1,0 +1,30 @@
+---
+
+- hosts: Servers
+  become: true
+  tasks:
+
+  - name: update repository index
+    yum:
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install apache
+    yum:
+      name: httpd
+      state: latest
+    when: ansible_distribution == "CentOS"
+
+  - name: start and enable httpd (CentOS)
+    ansible.builtin.service:
+      name: httpd
+      state: started
+      enabled: yes
+    when: ansible_distribution == "CentOS"    
+  
+  - name: install php 
+    yum:
+      name: php
+      state: latest
+    when: ansible_distribution == "CentOS"
+
